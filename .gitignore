@@ -1,4 +1,2 @@
 /target
-/dist
-.cargo_install
-node_modules
+*.log

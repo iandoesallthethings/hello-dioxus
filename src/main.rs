@@ -5,7 +5,7 @@ mod routes;
 use routes::*;
 mod components;
 
-const tailwind_styles: &str = include_str!("../dist/output.css");
+const tailwind_styles: &str = include_str!("../target/tailwind/built.css");
 
 fn main() {
     dioxus_desktop::launch(App);
