@@ -6,12 +6,16 @@ use files::*;
 
 pub fn Routes(cx: Scope) -> Element {
     cx.render(rsx! {
-        Router {
-            Nav {},
-            Route { to: "/", Home {}}
-            Route { to: "/counter" , CounterPage {}},
-            Route { to: "/files", FilesPage {}},
-            Route { to: "", NotFound {}}
+        div {
+            class: "flex flex-col items-center gap-2",
+            Router {
+                Nav {}
+
+                Route { to: "/", Home {}}
+                Route { to: "/counter" , CounterPage {}},
+                Route { to: "/files", FilesPage {}},
+                Route { to: "", NotFound {}}
+            }
         }
     })
 }
@@ -19,7 +23,7 @@ pub fn Routes(cx: Scope) -> Element {
 fn Nav(cx: Scope) -> Element {
     cx.render(rsx! {
         nav {
-            class: "flex flex-row items-center gap-2 p-2",
+            class: "flex flex-row w-full items-center gap-2 p-2",
 
             Link {
                 to: "/",
@@ -41,28 +45,19 @@ fn Nav(cx: Scope) -> Element {
 
 pub fn Home(cx: Scope) -> Element {
     cx.render(rsx! {
-        div {
-            class: "flex flex-col justify-center gap-2 text-center",
+        h1 {
+            "Welcome to Dioxus!"
+        }
 
-            h1 {
-                "Welcome to Dioxus!"
-            }
-
-            p {
-                "This is a simple example of a Dioxus app."
-            }
-
-            Link {
-                to: "/counter",
-                "Go to counter page"
-            }
+        p {
+            "This is a simple example of a Dioxus app."
         }
     })
 }
 
 pub fn NotFound(cx: Scope) -> Element {
     cx.render(rsx! {
-        div {
+        h1 {
             "404 Not Found"
         }
     })

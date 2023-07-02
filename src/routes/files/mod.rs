@@ -1,25 +1,33 @@
 use crate::prelude::*;
+mod file_row;
+use file_row::*;
 
 pub fn FilesPage(cx: Scope) -> Element {
-    let mut count = use_state(cx, || 0);
+    let paths = get_files();
 
     cx.render(rsx! {
-        div {
-            display: "flex",
-            flex_direction: "column",
-            align_items: "center",
-            gap: "1rem",
+        h1 { "files" },
 
-            h1 {
-                "Hello, world!",
+        ul {
+            for path in paths {
+                FileRow{
+                    path: path,
+                }
             }
-
-            Button {
-                on_click: move |_| count += 1
-                "clicked {count} times"
-            }
-        },
-
-
+        }
     })
+}
+
+fn get_files() -> Vec<String> {
+    let dir = "/Users/ian/DJ/musik";
+
+    std::fs::read_dir(dir)
+        .unwrap()
+        .take(5)
+        .filter_map(|result_dir_entry| {
+            result_dir_entry
+                .map(|dir_entry| dir_entry.path().to_string_lossy().into_owned())
+                .ok()
+        })
+        .collect()
 }
