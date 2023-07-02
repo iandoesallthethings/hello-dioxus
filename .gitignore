@@ -1,1 +1,3 @@
 /target
+.cargo_install
+node_modules

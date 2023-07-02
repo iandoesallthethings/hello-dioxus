@@ -2,8 +2,23 @@
 name = "hello-dioxus"
 version = "0.1.0"
 edition = "2021"
+description = "A simple app to say hello to Dioxus."
 
-# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+[package.metadata.bundle]
+name = "hello-dioxus"
+identifier = "ai.hyperbloom.hello-dioxus"
+version = "0.1.0"
+copyright = "Copyright (c) 2023"
+category = "public.app-category.educational-games"
+short_description = "A simple app to say hello to Dioxus."
+long_description = "A simple app to say helloooooooooooooooooooooooooooooooooo to Dioxus."
+
+[package.metadata.commands]
+setup = { cmd = ["cargo install cargo-watch --version 8.4.0 --root ./.cargo_install", "cargo install cargo-bundle --version 0.6.0 --root ./.cargo_install", "yarn"] }
+tailwind = "yarn tailwindcss -i ./src/input.css -o ./dist/output.css --watch"
+dioxus = "./.cargo_install/bin/cargo-watch -x run"
+dev = { cmd = ["cargo cmd tailwind", "cargo cmd dioxus"], parallel = true }
+build = "./.cargo_install/bin/cargo-bundle bundle --release"
 
 [dependencies]
 dioxus = "0.3.2"

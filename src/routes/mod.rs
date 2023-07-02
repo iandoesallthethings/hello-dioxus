@@ -1,13 +1,16 @@
 use crate::prelude::*;
 mod counter;
-pub use counter::*;
+use counter::*;
+mod files;
+use files::*;
 
 pub fn Routes(cx: Scope) -> Element {
     cx.render(rsx! {
         Router {
             Nav {},
             Route { to: "/", Home {}}
-            Route { to: "counter" , CounterPage {}},
+            Route { to: "/counter" , CounterPage {}},
+            Route { to: "/files", FilesPage {}},
             Route { to: "", NotFound {}}
         }
     })
@@ -16,10 +19,7 @@ pub fn Routes(cx: Scope) -> Element {
 fn Nav(cx: Scope) -> Element {
     cx.render(rsx! {
         nav {
-            display: "flex",
-            flex_direction: "row",
-            align_items: "center",
-            gap: "1rem",
+            class: "flex flex-row items-center gap-2 p-2",
 
             Link {
                 to: "/",
@@ -30,6 +30,11 @@ fn Nav(cx: Scope) -> Element {
                 to: "/counter",
                 "Counter"
             }
+
+            Link {
+                to: "/files",
+                "Files"
+            }
         }
     })
 }
@@ -37,10 +42,7 @@ fn Nav(cx: Scope) -> Element {
 pub fn Home(cx: Scope) -> Element {
     cx.render(rsx! {
         div {
-            display: "flex",
-            flex_direction: "column",
-            align_items: "center",
-            gap: "1rem",
+            class: "flex flex-col justify-center gap-2 text-center",
 
             h1 {
                 "Welcome to Dioxus!"
